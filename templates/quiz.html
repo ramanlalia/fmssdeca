@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script src="/js/quiz.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="page_header">
+  <h2>Quiz</h2>
+  <p class="subheading">{{ clustre_desc }}</p>
+</div>
+
+<div id="loading" style="text-align: center; display: none; padding: 50px;"><img src="/img/loading.gif" /></div>
+<div class="question">
+  <div class="header">
+    <table>
+      <tr>
+        <td class="q_box" width="20">Q.</td>
+        <td id="question_box" width="800">{{ first_question['question'] }}</td>
+        <td class="count_box" width="60">1 / {{ n }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="choices" data-correct-choice="{{ first_question['correct_answer_index'] }}">
+    <a href="#" class="choice hoverable"><strong>A.</strong> <span>{{ first_question['answers'][0] }}</span></a>
+    <a href="#" class="choice hoverable"><strong>B.</strong> <span>{{ first_question['answers'][1] }}</span></a>
+    <a href="#" class="choice hoverable"><strong>C.</strong> <span>{{ first_question['answers'][2] }}</span></a>
+    <a href="#" class="choice hoverable"><strong>D.</strong> <span>{{ first_question['answers'][3] }}</span></a>
+  </div>
+
+  <div class="correct">
+    Correct.
+  </div>
+
+  <div class="incorrect">
+    Wrong.
+  </div>
+
+  <div class="explanation">
+    {{ first_question['explanation'] }}
+  </div>
+</div>
+
+<a href="#" id="next_question" class="primary_button">Next Question</a>
+<a href="#" id="next_button" class="primary_button">Next</a>
+<a href="#" id="stop_quiz" class="button">Stop Test</a>
+<div class="clear"></div>
+
+<div id="results">
+  <h1>You answered 5 out of 6 questions correctly. <br /> Your percentage score was 92%.</h1>
+  <a href="#" id="retry_quiz" class="big_button">Take the test again.</a>
+  <a href="#" id="another_quiz" class="big_button">Take another test.</a>
+</div>
+
+<script>
+  var question_ids = [{{ question_ids }}];
+  var current_question = 0;
+  var n = {{ n }};
+  var clustre = "{{ clustre }}";
+</script>
+{% endblock %}
+
